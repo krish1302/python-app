@@ -1,0 +1,108 @@
+<ScreenManagement>:
+	id:screenManagement
+	HomeScreen:
+		name:"home"
+		screenManagement:screenManagement
+	SecondScreen:
+		name:"second"
+		screenManagement:screenManagement
+	ThirdScreen:
+		name:"third"
+		screenManagement:screenManagement
+
+<HomeScreen>:
+	MDBoxLayout:
+		orientation: "vertical"
+		width:root.width
+		height:root.height
+		MDToolbar:
+			title: "Counting Appliction"
+			md_bg_color: app.theme_cls.primary_color
+			halign:"center"
+		
+		MDBoxLayout:
+			orientation:"vertical"
+			spacing:100
+			canvas.before:        
+				Color:
+					rgba: 1,1,1, 1
+				Rectangle:
+					pos: self.pos
+					size: self.size
+			
+			Widget:
+			MDLabel:
+				text:"Arduino Based Counting in Public Transports"
+				halign:"center"
+			MDRectangleFlatIconButton:
+				icon:"bus"
+				user_font_size: "64sp"
+				text:"Bus"
+				pos_hint:{'center_x':0.5}
+				on_press: root.setVehicle(self,self.text,self.icon)
+			MDRectangleFlatIconButton:
+				icon:"train"
+				user_font_size: "64sp"
+				text:"Train"
+				pos_hint:{'center_x':0.5}
+				on_press: root.setVehicle(self,self.text,self.icon)
+			Widget:
+
+<SecondScreen>:
+	MDBoxLayout:
+		orientation: "vertical"
+		
+		MDToolbar:
+			title: app.bus + " in Nagercoil"
+			md_bg_color: app.theme_cls.primary_color
+			left_action_items: [["arrow-left-thick", lambda x: root.goHome(self)]]
+		BoxLayout:
+			orientation:"vertical"
+			spacing:100
+			Widget:
+			MDRectangleFlatIconButton:
+				icon:app.icon
+				text:app.bus + " 1"
+				pos_hint:{'center_x':0.5}
+				on_press:root.goThird(self,self.text)
+			MDRectangleFlatIconButton:
+				icon:app.icon
+				text:app.bus + " 2"
+				pos_hint:{'center_x':0.5}
+				on_press:root.goThird(self,self.text)
+			MDRectangleFlatIconButton:
+				icon:app.icon
+				text:app.bus + " 3"
+				pos_hint:{'center_x':0.5}
+				on_press:root.goThird(self,self.text)
+			Widget:
+
+<ThirdScreen>:
+	MDBoxLayout:
+		orientation: "vertical"
+		
+
+		MDToolbar:
+			title: app.s_bus
+			md_bg_color: app.theme_cls.primary_color
+			left_action_items: [["arrow-left-thick", lambda x: root.goSecond(self)]]
+		BoxLayout:
+			orientation:"vertical"
+			padding:[20,0,0,0]
+			spacing:(10,10)
+			MDLabel:
+				text:app.bus+" route : " + app.route
+				
+			MDLabel:
+				text:"Total Number of Seats : " +str(app.tseats)
+				
+			MDLabel:
+				text:"People in the "+ app.bus +" : "+ str(app.pib) 
+				
+			MDLabel:
+				text:"Number of Seats Empty : " + str(app.sie)
+				
+			MDLabel:
+				text:"Maximum Number of People : " + str(app.mnp)
+	
+				
